@@ -15,7 +15,7 @@
     <input v-model="AddTxt" type="text">
     <input v-on:click="addTodo" type="button" value="提交">
     <ul>
-        <!-- 注意点1： 用is属性来指向组件 避免一些渲染bug -->
+        <!-- 注意点1： 用is属性来指向组件 避免一些渲染上的bug -->
         <li is="Todo-item" :content="Item"
                    :index="Index"
                    v-for="(Item, Index) of List">
