@@ -1,0 +1,48 @@
+<!--**
+ * Created by Tyler on 2017/10/9 11:46.
+ * Updated by Tyler on 2018/8/8 15:16.
+ * 2-6 使用组件改造TodoList_慕课网  https://coding.imooc.com/lesson/203.html#mid=12986
+ * -->
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>组件化TodoList</title>
+    <!--<script src="../lib/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input v-model="AddTxt" type="text">
+    <input v-on:click="addTodo" type="button" value="提交">
+    <ul>
+        <todo-item v-bind:content="Item"
+                   v-for="Item in List">
+        </todo-item>
+    </ul>
+</div>
+
+<script>
+
+    Vue.component("TodoItem", {
+        props: ["content"],
+        template: "<li>{{content}}</li>"
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            List:["第一课的内容", "第二课的内容", "第三课的内容", "第四课的内容"]
+            ,AddTxt: ""
+        },
+        methods: {
+            addTodo: function(){
+                // console.log(app.$data.AddTxt);//也可以写成这样的形式:     console.log(this.AddTxt);
+                this.List.push(this.AddTxt);
+                this.AddTxt = "";
+            }
+        }
+    });
+</script>
+</body>
+</html>

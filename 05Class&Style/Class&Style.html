@@ -1,0 +1,43 @@
+<!--**
+ * Created by Tyler on 2018-8-11 18:10:12
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Class&Style</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p :class="{red: IsActive}" @click="toggleActive(message)">{{ message }}</p>
+    <p :class="{red: IsActive}" :style="styleObj" @click="toggleActive(message)">{{ message }}</p>
+    <p :class="{red: IsActive}" @click="IsActive=!IsActive">{{ message }}</p>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            ,IsActive: false
+            ,styleObj: {
+                color: "green"
+                ,fontSize: "20px"
+            }
+        },
+        methods: {
+            toggleActive: function (msg) {
+                console.log(msg);
+                this.IsActive = !this.IsActive;
+            }
+        }
+    });
+</script>
+</body>
+</html>

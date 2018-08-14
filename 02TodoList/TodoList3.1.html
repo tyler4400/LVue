@@ -1,0 +1,50 @@
+<!--**
+ * Created by Tyler on 2017/10/9 11:46.
+ * Updated by Tyler on 2018/8/8 15:16.
+ * 2-6 使用组件改造TodoList_慕课网  https://coding.imooc.com/lesson/203.html#mid=12986
+ * 在3的基礎上修改一下，这次注册为局部组件
+ * -->
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>开发TodoList，注册为局部组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input v-model="AddTxt" type="text">
+    <input v-on:click="addTodo" type="button" value="提交">
+    <ul>
+        <todo-item v-bind:content="Item"
+                   v-bind:index="Index"
+                   v-for="(Item, Index) of List">
+        </todo-item>
+    </ul>
+</div>
+
+<script>
+    var TodoItem = {
+        props: ["content", "index"],
+        template: "<li>{{index}}、{{content}}</li>"
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            TodoItem : TodoItem
+        },
+        data: {
+            List:["第一课的内容", "第二课的内容", "第三课的内容", "第四课的内容"]
+            ,AddTxt: ""
+        },
+        methods: {
+            addTodo: function(){
+                this.List.push(this.AddTxt);
+                this.AddTxt = "";
+            }
+        }
+    });
+</script>
+</body>
+</html>

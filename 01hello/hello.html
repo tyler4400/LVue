@@ -1,0 +1,35 @@
+<!--**
+ * Created by Tyler on 2017/10/9 11:46.
+ * Updated by Tyler on 2018/8/8 15:16
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>-->
+    <title>Vue学习 - 慕课网</title>
+    <!--<script src="../lib/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ message }}</p>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    });
+
+    /* 两秒钟之后变成bye world */
+    setTimeout(function(){
+        app.$data.message = "bye world!";
+        // app.message = "aaa";
+        console.log(app.$data);
+    }, 2000);
+</script>
+</body>
+</html>

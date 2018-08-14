@@ -1,0 +1,48 @@
+<!--**
+ * Created by Tyler on 2018-8-13 16:47:12
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <template v-for="(item, index) in list" >
+        <span>{{item.id}}</span>
+        <p>{{item.name}}</p>
+        <p>{{index}}</p>
+    </template>
+
+    <hr>
+    <div v-for="(item, key, index) of obj">
+        {{item}}--{{key}}--{{index}}
+    </div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            ,list: [{
+                id: "001",
+                name: "aaa"
+            }, {
+                id: "002",
+                name: "aaa"
+            }, {
+                id: "003",
+                name: "aaa"
+            }, {
+                id: "004",
+                name: "aaa"
+            }]
+            ,obj:{aaa: "aaa1", bbb: "bbb2", ccc: "ccc3"}
+        }
+    });
+</script>
+</body>
+</html>

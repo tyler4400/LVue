@@ -1,0 +1,36 @@
+<!--**
+ * Created by Tyler on 2018-8-13 15:51:16
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-if="IsTheOne">{{ message}} 1</p>
+    <p v-show="IsTheOne">{{ message}}2</p>
+    <p v-show="true">{{ message}} 3</p>
+    <hr>
+    <div v-if="IsName" style="">用户名: <input type="text"></div>
+    <div v-else style="white-space: pre">邮   箱: <input type="text"></div>
+    <hr>
+    <span>用 key 管理可复用的元素</span>
+    <div v-if="IsName" >用户名: <input type="text" key="username"></div>
+    <div v-else        >邮  箱: <input type="text" key="email"></div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            ,IsTheOne: false
+            ,IsName: true
+        }
+    });
+</script>
+</body>
+</html>

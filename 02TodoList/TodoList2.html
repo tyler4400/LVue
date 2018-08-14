@@ -1,0 +1,47 @@
+<!--**
+ * Created by Tyler on 2017/10/9 11:46.
+ * Updated by Tyler on 2018/8/8 15:16.
+ * 2-4 MVVM模式_慕课网  https://coding.imooc.com/lesson/203.html#mid=12984
+ * 用jquery来写一个todolist
+ * -->
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>传统开发TodoList</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+    <input id="input" type="text">
+    <button id="btn">提交</button>
+    <ul id="ul"></ul>
+</div>
+<script>
+    function Page() {
+    }
+
+    $.extend(Page.prototype, {
+        handleBtnClick: function () {
+            var $inputElm = $("#input");
+            var inputValue = $inputElm.val();
+            var $ulElm = $("#ul");
+            $ulElm.append("<li>" + inputValue + "</li>");
+            $inputElm.val("");
+        },
+        bindEvents: function () {
+            var $btn = $("#btn");
+            $btn.on("click", $.proxy(this.handleBtnClick, this));
+        },
+        init: function () {
+            this.bindEvents();
+        }
+    });
+
+    var page = new Page();
+    page.init();
+</script>
+</body>
+</html>

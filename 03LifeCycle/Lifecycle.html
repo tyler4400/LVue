@@ -1,0 +1,58 @@
+<!--**
+ * Created by Tyler on 2018年8月10日 09:37:53
+ * vue生命周期相关
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue实例生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+    </div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        template:"<div><p>{{message}}</p></div>",
+        beforeCreate: function () {
+            console.log("beforeCreate");
+        },
+        created: function () {
+            console.log("created");
+        },
+        beforeMount: function () {
+            console.log("beforeMount");
+            console.log(this.$el);
+        },
+        mounted: function () {
+            console.log("mounted");
+            console.log(this.$el);
+        },
+        beforeDestroy: function () {
+            console.log("beforeDestroy");
+        },
+        destroyed: function () {
+            console.log("destroyed");
+        },
+        beforeUpdate: function () {
+            console.log("beforeUpdate");
+            console.log(this.$el);
+        },
+        updated: function () {
+            console.log("updated");
+            console.log(this.$el);
+        }
+
+
+
+    });
+</script>
+</body>
+</html>
