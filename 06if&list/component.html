@@ -21,18 +21,28 @@
                    v-for="(Item, Index) of List">
         </li>
     </ul>
+
+    <hr>
+    <!-- 注意点3：ref写在标签元素上$refs获得的是dom，在组件上获得的是组件的引用 -->
+    <div @click="sendTxt" ref="hello">hello, everyone</div>
+    <div is="todo-item" @click="sendTxt" ref="hello">hello, everyone</div>
 </div>
 
 <script>
     var TodoItem = {
         props: ["content", "index"],
-        template: "<li>{{index}}、{{content}}{{msg}}</li>",
+        template: "<li @click='handleClick()'>{{index}}、{{content}}{{count}}</li>",
         data: function () {
             return {
                 //data object goes here...
                 //注意点2： 组件里的数据必须用函数返回一个data对象
-                msg: "."
+                count: 0
             };
+        },
+        methods: {
+            handleClick: function () {
+                this.count ++;
+            }
         }
     };
 
@@ -49,6 +59,9 @@
             addTodo: function(){
                 this.List.push(this.AddTxt);
                 this.AddTxt = "";
+            },
+            sendTxt: function () {
+                console.log(this.$refs.hello);
             }
         }
     });
