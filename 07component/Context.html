@@ -7,14 +7,16 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>X父子组件的传值</title>
+    <title>父子组件的传值</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
 <div id="root">
-    <counter :count="23" @click="handleClick"></counter><!-- 父组件向子组件传值通过属性 -->
-    <counter :count="479" @click="handleClick"></counter>
+    <counter :count="2" @click="handleClick"></counter><!-- 父组件向子组件传值通过属性 -->
+    <counter :count="3" @click="handleClick"></counter><!-- 父组件里的@click是监听子组件的click事件 -->
     <div >{{sum}}</div>
+    <hr>
+    <counter :count="479" @click.native="aaa"></counter><!-- 加了native就是原生时间了，会被父组件监听到 -->
 </div>
 
 <script>
@@ -30,6 +32,9 @@
             handleClick: function () {
                 this.number ++;
                 this.$emit("click", 1);
+            },
+            aaa: function () {
+                console.log("我是子组件");
             }
         }
     };
@@ -46,7 +51,11 @@
             handleClick: function (step) {
                 this.sum += step;
 
+            },
+            aaa: function () {
+                console.log("我是父组件");
             }
+
         }
     });
 </script>
