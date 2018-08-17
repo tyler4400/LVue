@@ -1,0 +1,53 @@
+<!--**
+ * Created by Tyler on 2018-8-15 14:42:24
+ * 4-5 非父子组件间的传值_慕课网  https://coding.imooc.com/lesson/203.html#mid=13002
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>4-5 非父子组件间的传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child content="海绵"></child>
+    <child content="宝宝"></child>
+    <img src="../img/SpongeBob.jpg" alt="">
+</div>
+
+<script>
+    Vue.prototype.bus = new Vue();
+
+    Vue.component("child", {
+        props: {
+            content: String
+        },
+        data: function() {
+              return {
+                    myContent: this.content
+              };
+        },
+        template: "<div @click='handleClick'>{{myContent}}</div>",
+        methods: {
+            handleClick: function () {
+                this.bus.$emit("clicked", this.content);
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            this.bus.$on("clicked", function (msg) {
+                _this.myContent += msg;
+            })
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    });
+</script>
+</body>
+</html>
