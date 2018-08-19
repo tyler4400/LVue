@@ -1,0 +1,45 @@
+<!--**
+ * Created by Tyler on 2018-8-17 15:30:33.
+ * 4-6 在Vue中使用插槽_慕课网  https://coding.imooc.com/lesson/203.html#mid=13003
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在Vue中使用插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child>
+        <p>hello</p>
+    </child>
+    <child></child>
+    <hr>
+
+    <body-wrap>
+        <div class="header" slot="header">我是header</div>
+        <div class="footer" slot="footer">我是footer</div>
+    </body-wrap>
+</div>
+
+<script>
+    Vue.component("child", {
+        template: "<div><slot><span>我是默认内容</span></slot></div>"
+    });
+    Vue.component("body-wrap", {
+        template: `<div>
+                        <slot name='header'>默认header</slot>
+                        <div class='content'>我是content</div>
+                        <slot name='footer'>默认footer</slot>
+                        <slot>这时、这里啥标签都不会有</slot>
+                </div>`
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        }
+    });
+</script>
+</body>
+</html>
