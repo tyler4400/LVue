@@ -1,0 +1,54 @@
+<!--**
+ * Created by Tyler on 2018-8-19 20:02:43
+ * 5-1 Vue动画 - Vue中CSS动画原理_慕课网  https://coding.imooc.com/lesson/203.html#mid=13006
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue中CSS动画原理_慕课网</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <style>
+        .v-enter{
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .v-enter-active{
+            transition: all 3s;
+        }
+
+        .v-leave-active{
+            transition: all 1s;
+        }
+
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="toggle">toggle</button>
+    <transition>
+        <p v-show="show">{{message}}</p>
+    </transition>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            , show: true
+        },
+        methods: {
+            toggle: function (){
+                this.show = !this.show;
+            }
+        }
+    });
+</script>
+</body>
+</html>

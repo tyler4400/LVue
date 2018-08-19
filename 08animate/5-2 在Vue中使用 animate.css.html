@@ -1,0 +1,108 @@
+<!--**
+ * Created by Tyler on 2018-8-19 21:02:54
+ * 5-2 在Vue中使用 animate.css 库_慕课网  https://coding.imooc.com/lesson/203.html#mid=13007
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>5-2 在Vue中使用 animate.css </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <style>
+        .entering{
+            transform-origin: left center;
+            animation: bounce-in 1s;
+        }
+
+        .leaving{
+            transform-origin: left center;
+            animation: bounce-in 1s reverse;
+        }
+
+        @keyframes bounce-in{
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+    </style>
+    <style>
+        li{
+            padding: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="toggle">toggle</button>
+    <transition name="fade" enter-active-class="entering" leave-active-class="leaving">
+        <p v-show="show">{{message}}</p>
+    </transition>
+
+
+    <hr>
+    <animated :animated-type="animationWays"></animated>
+</div>
+
+<script>
+    Vue.component("animated", {
+        props: ["animatedType"],
+        data: function (){
+            return {
+                type: this.animatedType,
+                show: true
+            }
+        },
+        template: `<div>
+                       <button @click="toggle">toggle</button>
+                       <ul>
+                            <transition v-for="(item, key) in type"
+                                        name="fade"
+                                        :key="key"
+                                        :enter-active-class="item"
+                                        :leave-active-class="item"
+                                        >
+                                <li v-show="show">{{item}}</li>
+                            </transition>
+                       </ul>
+                   </div>`,
+        methods: {
+            toggle: function (){
+                this.show = !this.show;
+            }
+        }
+    });
+
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            , show: true
+            , animationWays: [
+                "animated flash",
+                "animated swing",
+                "animated slideOutRight",
+                "animated zoomIn",
+                "animated rollOut",
+                "animated flip",
+                "animated rotateOut",
+                "animated fadeOutDownBig"
+            ]
+        },
+        methods: {
+            toggle: function (){
+                this.show = !this.show;
+            }
+        }
+    });
+</script>
+</body>
+</html>
