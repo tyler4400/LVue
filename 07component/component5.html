@@ -1,0 +1,45 @@
+<!--**
+ * Created by Tyler on 2018-8-19 17:44:21
+ * 4-7 作用域插槽_慕课网  https://coding.imooc.com/lesson/203.html#mid=13004
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>作用域插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child>
+        <template slot-scope="args"><!-- 作用越插槽必须由template包裹，必须由slot-scope接收参数 -->
+            <li>
+                <p>{{args.item=}}</p>
+            </li>
+        </template>
+    </child>
+</div>
+
+<script>
+    Vue.component("child", {
+        data: function (){
+            return {
+                list: [1, 2, 3, 4]
+            };
+        },
+        template: `<div>
+                        <ul>
+                            <slot v-for="item in list" :item="item"></slot>
+                        </ul>
+                    </div>`
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    });
+</script>
+</body>
+</html>
