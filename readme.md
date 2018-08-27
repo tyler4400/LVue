@@ -4,3 +4,5 @@
 
 。。。。test
 本地test
+
+gulp-static-hash
