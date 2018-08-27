@@ -1,0 +1,90 @@
+<!--**
+ * Created by Tyler on 2018-8-19 20:02:43
+ * 5-5 Vue中多个元素或组件的过渡_慕课网  https://coding.imooc.com/lesson/203.html#mid=13010
+ * -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>5-5 Vue中多个元素或组件的过渡</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <style>
+        .v-enter{
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .v-enter-active{
+            transition: all 3s;
+        }
+
+        .v-leave-active{
+            transition: all 1s;
+        }
+
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="toggle">toggle</button>
+    <transition mode="out-in">
+        <p v-if="show" key="hello">{{message}}</p>
+        <p v-else="show" key="bye">{{message2}}</p>
+    </transition>
+</div>
+
+<hr>
+
+<div id="app2">
+    <button @click="toggle">toggle</button>
+    <transition mode="out-in">
+        <component :is="childName"></component>
+    </transition>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+            , message2: 'Bye Vue.js!'
+            , show: true
+        },
+        methods: {
+            toggle: function (){
+                this.show = !this.show;
+            }
+        }
+    });
+
+    /* 组件之间的过度 */
+    Vue.component("child1", {
+        template: `<p>child one</p>`
+    });
+    Vue.component("child2", {
+        template: `<p>child two</p>`
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        component: {
+
+        },
+        data: {
+            message: 'Hello Vue.js!'
+            , message2: 'Bye Vue.js!'
+            , show: true
+            , childName: "child1"
+        },
+        methods: {
+            toggle: function (){
+                this.childName = this.childName === "child1" ? "child2" : "child1";
+            }
+        }
+    });
+</script>
+</body>
+</html>
